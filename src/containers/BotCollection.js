@@ -6,11 +6,11 @@ class BotCollection extends React.Component {
 
   render() {
 
-	// const {bots} = this.state;
+	const {bots} = this.props;
     return (
       <div className="ui four column grid">
         <div className="row">
-		{this.props.bots.bots.map((bot, i) => {
+		{bots.bots.map((bot, i) => {
             return <BotCard key={i} bot={bot} addToArmy={this.props.addToArmy}/>;
           })}
           Collection of all bots
