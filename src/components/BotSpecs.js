@@ -61,7 +61,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                console.log('connect this to a function that shows all bots')
+                console.log("connect this to a function that shows all bots")
               }
             >
               Go Back
@@ -81,7 +81,6 @@ const BotSpecs = props => {
       </div>
     </div>
   );
-
 };
 
 export default BotSpecs;
