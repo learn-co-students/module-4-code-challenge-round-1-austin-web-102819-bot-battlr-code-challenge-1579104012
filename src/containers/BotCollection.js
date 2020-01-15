@@ -9,6 +9,7 @@ class BotCollection extends React.Component {
 					{this.props.allBots.map((bot) => (
 						<BotCard
 							addToArmy={() => this.props.addToArmy(bot)}
+							showDetails={() => this.props.showDetails(bot)}
 							bot={bot}
 							container={'collection'}
 						></BotCard>

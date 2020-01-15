@@ -10,10 +10,11 @@ class BotCard extends React.Component {
 	}
 
 	handleCardClick = () => {
+		// console.log(this.props.bot);
 		if (this.state.container === 'collection') {
-			this.props.addToArmy();
+			this.props.showDetails();
 		} else if (this.state.container === 'army') {
-			this.props.deleteFromArmy();
+			this.props.deleteFromArmy(this.props.bot);
 		}
 	};
 

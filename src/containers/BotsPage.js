@@ -1,13 +1,15 @@
 import React from 'react';
 import YourBotArmy from './YourBotArmy';
 import BotCollection from './BotCollection';
+import BotSpecs from '../components/BotSpecs';
 
 class BotsPage extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			allBots: [],
-			army: []
+			army: [],
+			showDetails: ''
 		};
 	}
 	//start here with your code for step one
@@ -23,22 +25,36 @@ class BotsPage extends React.Component {
 			this.setState((previousState) => {
 				return {
 					allBots: previousState.allBots,
-					army: [...previousState.army, bot]
+					army: [...previousState.army, bot],
+					showDetails: ''
 				};
 			});
 		}
 	};
 
-	deleteFromArmy = (bot) => {
-		let currentArmy = this.state.army;
-		let botIndex = currentArmy.indexOf(bot);
-		let deleted = currentArmy.splice(botIndex, 1);
+	deleteFromArmy = (deleteBot) => {
+		console.log(deleteBot);
+		// let currentArmy = this.state.army;
+		// let botIndex = currentArmy.indexOf(bot);
+		// currentArmy.splice(botIndex, 1);
 		this.setState((previousState) => {
+			let army = previousState.army;
+			let botIndex = army.indexOf(deleteBot);
+			army.splice(botIndex, 1);
+			// delete army[botIndex];
 			return {
 				allBots: previousState.allBots,
-				army: currentArmy
+				army: army
 			};
 		});
+	};
+
+	showDetails = (bot) => {
+		this.setState({ showDetails: bot });
+	};
+
+	goBack = () => {
+		this.setState({ showDetails: '' });
 	};
 
 	render() {
@@ -46,12 +62,21 @@ class BotsPage extends React.Component {
 			<div>
 				<YourBotArmy
 					army={this.state.army}
-					deleteFromArmy={this.deleteFromArmy}
+					deleteFromArmy={(deleteBot) => this.deleteFromArmy(deleteBot)}
 				></YourBotArmy>
-				<BotCollection
-					allBots={this.state.allBots}
-					addToArmy={this.addToArmy}
-				></BotCollection>
+				{this.state.showDetails === '' ? (
+					<BotCollection
+						allBots={this.state.allBots}
+						addToArmy={this.addToArmy}
+						showDetails={this.showDetails}
+					></BotCollection>
+				) : (
+					<BotSpecs
+						bot={this.state.showDetails}
+						goBack={this.goBack}
+						addToArmy={this.addToArmy}
+					></BotSpecs>
+				)}
 			</div>
 		);
 	}
