@@ -22,12 +22,12 @@ class BotsPage extends React.Component {
       );
   }
 
-  handleBotClick = bot => {
-    this.setState({
-      botArmy: [...this.state.botArmy, bot]
-    });
-    console.log("clicked");
-  };
+  // handleBotClick = bot => {
+  //   this.setState({
+  //     botArmy: [...this.state.botArmy, bot]
+  //   });
+  //   console.log("clicked");
+  // };
 
   render() {
     return (
@@ -35,7 +35,7 @@ class BotsPage extends React.Component {
         <YourBotArmy botArmy={this.state.botArmy} />
         <BotsCollection
           botData={this.state.botData}
-          handleBotClick={this.handleBotClick}
+          // handleBotClick={this.handleBotClick}
         />
       </div>
     );

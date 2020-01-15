@@ -4,6 +4,17 @@ import BotSpecs from "../components/BotSpecs";
 
 class BotCollection extends React.Component {
   //   your code here
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     display: false
+  //   };
+  // }
+
+  // handleBotClick = () => {
+  //   this.setState({ display: true });
+  //   console.log("clicked");
+  // };
 
   render() {
     return (
@@ -13,8 +24,11 @@ class BotCollection extends React.Component {
           <BotCard
             key={bot.id}
             bot={bot}
-            handleBotClick={this.props.handleBotClick}
+            handleBotClick={this.handleBotClick}
           />
+        ))}
+        {this.props.botData.map(bot => (
+          <BotSpecs key={bot.name} bot={bot} />
         ))}
       </div>
     );
