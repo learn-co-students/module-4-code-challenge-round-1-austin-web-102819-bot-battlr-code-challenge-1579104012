@@ -9,18 +9,35 @@ class BotsPage extends React.Component {
 
     this.state = {
       bots: [],
-      myBots: []
+      myBots: [],
+      clicked: false
     };
   }
+  goBack = () => {
+    this.setState({ clicked: false });
+  };
 
-  handleClick = (bot) => {
-    if (this.state.myBots.includes(bot)) {
+  handleClick = bot => {
+    this.setState({
+      clicked: bot
+    });
+  };
+
+  enlist = bot => {
+    if (this.state.myBots.find(b => b === bot)) {
+      null;
+    } else {
+      this.setState({ myBots: [bot, ...this.state.myBots] });
+    }
+  };
+  unenlist = bot => {
+    if (!this.state.myBots.find(b => b === bot)) {
+      null;
+    } else {
       let newArray = [...this.state.myBots]
       let index = newArray.indexOf(bot)
       newArray.splice(index, 1)
-      this.setState({myBots: newArray})
-    } else {
-      this.setState({myBots: [bot, ...this.state.myBots]})
+      this.setState({ myBots: newArray });
     }
   };
 
@@ -32,8 +49,20 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy bots={this.state.myBots} handleClick={this.handleClick}/>
-        <BotCollection bots={this.state.bots} handleClick={this.handleClick} />
+        <YourBotArmy
+          bots={this.state.myBots}
+          enlist={this.enlist}
+          handleClick={this.handleClick}
+          
+        />
+        <BotCollection
+          bots={this.state.bots}
+          enlist={this.enlist}
+          goBack={this.goBack}
+          handleClick={this.handleClick}
+          clicked={this.state.clicked}
+          unenlist={this.unenlist}
+        />
       </div>
     );
   }
