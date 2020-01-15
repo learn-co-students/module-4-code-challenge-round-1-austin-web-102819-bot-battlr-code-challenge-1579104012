@@ -8,6 +8,7 @@ class BotsPage extends React.Component {
   state= {
     bots: [],
     selectedBots: [],
+    isSelected: false
     
   }
 
@@ -16,15 +17,19 @@ class BotsPage extends React.Component {
     const newArmyArray= this.state.selectedBots.concat(bot)
     this.setState({
       selectedBots: newArmyArray,
+      isSelected: !this.state.isSelected
     })
     this.state.selectedBots.includes(bot) ? this.state.selectedBots.splice(0, bot) : null;
   }
   // I tried creating a separate event handler to handle clicking the card component from YourBotArmy, 
   // but I couldn't figure out how to give a component 2 event listeners (or if that's even possible)
-  // removeFromArmy = (bot) => {
-  //   console.log(">>> This works");
+  removeFromArmy = (bot) => {
+    const newSelectedBots= this.state.selectedBots.splice(0,bot)
+    this.setState({
+      selectedBots: newSelectedBots
+    })
     
-  // }
+  }
   componentDidMount() {
     fetch(API)
       .then(response => response.json())
@@ -46,7 +51,7 @@ class BotsPage extends React.Component {
     return (
       <div>
         {/* put your components here */}
-        <YourBotArmy botArmy={this.state.selectedBots} />
+        <YourBotArmy botArmy={this.state.selectedBots} isSelected={this.state.isSelected} addToArmy={this.removeFromArmy}  />
         <BotCollection bots={this.state} addToArmy={this.addToArmy} />
       </div>
     );
