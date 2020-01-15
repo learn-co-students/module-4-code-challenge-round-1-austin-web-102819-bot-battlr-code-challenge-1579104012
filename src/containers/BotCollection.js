@@ -18,7 +18,7 @@ class BotCollection extends React.Component {
 
 	render() {
 		return (
-			<div className="ui four column relaxed centered grid">
+			<div className="ui four column relaxed grid">
 				<div className="row">
 					{this.state.botSpecs === null ? (
 						this.props.bots.map((bot) => (
@@ -30,11 +30,13 @@ class BotCollection extends React.Component {
 							/>
 						))
 					) : (
-						<BotSpecs
-							bot={this.state.botSpecs}
-							goBack={this.goBack}
-							handleAddToBotsArmy={this.props.handleAddToBotsArmy}
-						/>
+						<div className="ui">
+							<BotSpecs
+								bot={this.state.botSpecs}
+								goBack={this.goBack}
+								handleAddToBotsArmy={this.props.handleAddToBotsArmy}
+							/>
+						</div>
 					)}
 				</div>
 			</div>
