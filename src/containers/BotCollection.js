@@ -19,15 +19,13 @@ class BotCollection extends React.Component {
     });
   };
 
-  render() {
+  displayBots = () => {
     if (!this.state.currentBot.id) {
       return (
-        <div className="ui four column grid">
-          <div className="row">
-            {this.props.bots.map(bot => (
-              <BotCard key={bot.id} bot={bot} viewBot={this.setCurrentBot} />
-            ))}
-          </div>
+        <div className="row">
+          {this.props.bots.map(bot => (
+            <BotCard key={bot.id} bot={bot} viewBot={this.setCurrentBot} />
+          ))}
         </div>
       );
     } else {
@@ -40,6 +38,10 @@ class BotCollection extends React.Component {
         />
       );
     }
+  };
+
+  render() {
+    return <div className="ui four column grid">{this.displayBots()}</div>;
   }
 }
 
